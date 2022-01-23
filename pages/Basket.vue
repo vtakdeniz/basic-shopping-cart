@@ -3,6 +3,11 @@
         <span v-if="$store.state.basket.length>0" class="basket-box border-8 border-gray-800  bg-white fixed left-0 right-0   px-2 sm:px-4 py-2.5 rounded dark:bg-gray-200">
             <strong>Your Basket</strong>
         </span>
+        <button @click="clearBasket" v-if="$store.state.basket.length>0" type="button" data-modal-toggle="popup-modal" class=" page-button px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-full">
+            Clear Basket
+        </button>
+
+
         <div v-if="$store.state.basket.length>0" class="products">
             <Product :key="productWrapper.product.id" :isBasket="true" 
             :product="productWrapper.product"
@@ -25,7 +30,9 @@ export default {
     name:'Basket',
     props:['basket'],
     methods:{
-
+        clearBasket(){
+            this.$store.commit('clearBasket');
+        }
     },
     mounted() {
     },
@@ -55,12 +62,14 @@ export default {
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
-        margin: 30px;
-        margin-top: 100px;
-        margin-bottom: 10px;
+        margin: 20px;
         padding: 10px;
     }
     .basket-box{
         margin-top: 70px;
+    }
+    .page-button{
+        margin-top: 190px;
+        margin-left: 15px;
     }
 </style>

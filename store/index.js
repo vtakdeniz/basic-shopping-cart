@@ -26,5 +26,8 @@ export const mutations={
     },
     deleteItem(state,product){
         state.basket.splice(state.basket.indexOf(product), 1);
+    },
+    clearBasket(state){
+        state.basket=[];
     }
 }
