@@ -1,5 +1,7 @@
 # basic-shopping-cart
 
+This project is a basic shopping cart where you can add or remove items from your basket. Based on how much product you have on your basket, site will calculate total price of all the products and will also calculate the price of each each product cluster.
+
 ## Build Setup
 
 ```bash
