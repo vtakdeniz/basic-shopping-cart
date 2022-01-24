@@ -18,7 +18,7 @@
             <span><strong>You have no items in your basket</strong></span>
         </div>
         <div v-if="$store.state.basket.length>0" class="totalPrice bg-indigo-800 text-white font-bold rounded-lg border shadow-lg p-10">
-               Total Price : {{totalPrice}}
+               Total Price : {{totalPrice}}$
         </div>
     </div>
 </template>
