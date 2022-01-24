@@ -51,7 +51,7 @@ export default {
                 this.$store.commit('decreaseItem', this.product.id);
             }
             else{
-                this.$store.commit('deleteItem', this.product);
+                this.$store.commit('deleteItem', this.product.id);
             }
         },
         increaseProduct(){

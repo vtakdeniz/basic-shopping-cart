@@ -24,8 +24,8 @@ export const mutations={
           productFromBasket.productCount++;
         }
     },
-    deleteItem(state,product){
-        state.basket.splice(state.basket.indexOf(product), 1);
+    deleteItem(state,itemid){
+        state.basket=state.basket.filter(e=>e.product.id!==itemid);
     },
     clearBasket(state){
         state.basket=[];
