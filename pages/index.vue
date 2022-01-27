@@ -19,14 +19,8 @@ export default {
   components:{
     Product
   },
-  created() {
-    this.$nuxt.$on('open-basket', data => {
-        this.$nuxt.$emit('send-basket',this.inBasket);
-      })
-    },
   methods:{
-    addToBasket(id){   
-      console.log(id); 
+     addToBasket(id){    
       let html=`<div id="info-box" class="info-box bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 fixed left-0 right-0" role="alert">
       <p class="font-bold">Product added</p>
       <p class="text-sm">Product added to your basket</p>
