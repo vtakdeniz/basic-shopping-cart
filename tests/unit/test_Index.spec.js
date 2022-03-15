@@ -110,6 +110,7 @@ describe('Index.vue', () => {
     button.trigger('click')
 
     expect(mutations.addItem).toHaveBeenCalled()
+    //wrapper.destroy()
   })
   
 

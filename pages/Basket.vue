@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { fetchAllBasket } from '../Api';
 import Product from '../components/Product.vue';
 export default {
   components: { Product },
@@ -36,8 +37,9 @@ export default {
     },
     mounted() {
     },
-    created(){
-        
+    async created(){
+         let inBasket=await fetchAllBasket('http://localhost:8080')
+         this.$store.commit('addWrapper', inBasket)
     },
     data(){
         return {

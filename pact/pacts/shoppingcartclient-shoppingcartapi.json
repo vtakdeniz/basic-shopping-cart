@@ -1,0 +1,119 @@
+{
+  "consumer": {
+    "name": "ShoppingCartClient"
+  },
+  "provider": {
+    "name": "ShoppingCartApi"
+  },
+  "interactions": [
+    {
+      "description": "a request for products",
+      "providerState": "i have a list of products",
+      "request": {
+        "method": "GET",
+        "path": "/api/products"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "id": 1,
+            "category": "Home",
+            "title": "Wooden dinner table",
+            "description": "Wooden table for dinner room",
+            "price": 1250,
+            "pic_link": "https://ronixtools.com/en/blog/wp-content/uploads/2021/03/Learn-how-to-make-a-simple-wooden-table-at-home1.jpg"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "post request to add product to basket",
+      "providerState": "i will add product to the basket",
+      "request": {
+        "method": "POST",
+        "path": "/api/basket/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        }
+      }
+    },
+    {
+      "description": "request for basket",
+      "providerState": "i will get the basket",
+      "request": {
+        "method": "GET",
+        "path": "/api/basket"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "product": {
+              "id": 1,
+              "category": "Home",
+              "title": "Wooden dinner table",
+              "description": "Wooden table for dinner room",
+              "price": 1250,
+              "pic_link": "https://ronixtools.com/en/blog/wp-content/uploads/2021/03/Learn-how-to-make-a-simple-wooden-table-at-home1.jpg"
+            },
+            "productCount": 1
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request for decreasing a product from the basket",
+      "providerState": "i will decrease product from basket",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/basket/1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        }
+      }
+    },
+    {
+      "description": "request for clearing basket",
+      "providerState": "i will clear the basket",
+      "request": {
+        "method": "DELETE",
+        "path": "/api/basket/"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
