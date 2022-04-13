@@ -8,6 +8,8 @@ RUN apk update && apk upgrade
 
 RUN apk add git
 
+RUN apk add npm
+
 COPY . /usr/app/
 
 RUN npm install
