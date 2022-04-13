@@ -20,7 +20,7 @@ unit-test:
   image: node:16
   stage: unit-test
   script:
-  - npm run test
+  - npm run test:unit
 
 build-image:
     stage: build-image
