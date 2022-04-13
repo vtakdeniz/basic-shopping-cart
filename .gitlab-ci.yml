@@ -12,6 +12,8 @@ build:
   stage: build
   image: node:16
   script:
+     - npm cache clean --force
+     - npm install
      - npm run generate
 
 unit-test:
