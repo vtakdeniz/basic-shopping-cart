@@ -1,0 +1,31 @@
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - unit-test
+  - build-image
+  
+build:
+  stage: build
+  image: node:16
+  script:
+     - npm run generate
+
+unit-test:
+  image: node:16
+  stage: unit-test
+  script:
+  - npm run test
+
+build-image:
+    stage: build-image
+    image: docker:20.10.10
+    services:
+        - docker:20.10.10-dind     
+    script:
+        - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+        - docker build -t $CI_REGISTRY_IMAGE .
+        - docker push $CI_REGISTRY_IMAGE

@@ -44,7 +44,7 @@ export default {
    }
   },
   async created(){
-    let products=await fetchAllProducts('http://localhost:8080')
+    let products=await fetchAllProducts()
     this.products=products
   }
 }

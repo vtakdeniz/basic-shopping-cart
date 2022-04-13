@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils'
 import { setupTest } from '@nuxt/test-utils'
 import Vuex from 'vuex'
-
+import flushPromises from 'flush-promises'
 import Header from '@/components/Header.vue'
 import Product from '@/components/Product.vue'
 import Basket from '@/pages/Basket.vue'
@@ -11,6 +11,11 @@ const localVue = createLocalVue()
 
 localVue.use(Vuex)
 
+jest.mock('axios', () => ({
+  get: jest.fn(() => Promise.resolve({status: 200})),
+  post: jest.fn(() => Promise.resolve({status: 200})),
+  delete: jest.fn(() => Promise.resolve({status: 200}))
+})) 
 
 describe('Header.vue', () => {
   it('renders Header', () => {
@@ -79,7 +84,8 @@ describe('Basket.vue', () => {
       decreaseItem: jest.fn(),
       increaseItem: jest.fn(),
       deleteItem: jest.fn(),
-      clearBasket: jest.fn()
+      clearBasket: jest.fn(),
+      addWrapper: jest.fn(),
     };
 
     store = new Vuex.Store({
@@ -111,7 +117,7 @@ describe('Basket.vue', () => {
     const wrapper = mount(Basket, { store, localVue })
     let comp= wrapper.findComponent(Product)
     let button = comp.findAll('button').at(1)
-    button.trigger('click')
+     button.trigger('click')
 
     expect(mutations.decreaseItem).toHaveBeenCalled()
   })
@@ -120,7 +126,7 @@ describe('Basket.vue', () => {
     const wrapper = mount(Basket, { store, localVue })
     let comp= wrapper.findComponent(Product)
     let button = comp.findAll('button').at(0)
-    button.trigger('click')
+     button.trigger('click')
 
     expect(mutations.increaseItem).toHaveBeenCalled()
   })
@@ -129,7 +135,7 @@ describe('Basket.vue', () => {
     const wrapper = mount(Basket, { store, localVue })
     let comp= wrapper.findAllComponents(Product).at(2)
     let button = comp.findAll('button').at(1)
-    button.trigger('click')
+     button.trigger('click')
 
     expect(mutations.deleteItem).toHaveBeenCalled()
   })
@@ -143,7 +149,7 @@ describe('Basket.vue', () => {
   it('calls clear basket', () => {
     const wrapper = shallowMount(Basket, { store, localVue }) 
     let button = wrapper.findAll('button').at(0)
-    button.trigger('click')
+     button.trigger('click')
     expect(mutations.clearBasket).toHaveBeenCalled()
   })
 

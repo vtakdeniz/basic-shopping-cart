@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue, mount } from '@vue/test-utils'
 import { setupTest } from '@nuxt/test-utils'
 import Vuex from 'vuex'
-
+import flushPromises from 'flush-promises'
 import Header from '@/components/Header.vue'
 import Product from '@/components/Product.vue'
 import Basket from '@/pages/Basket.vue'
@@ -11,6 +11,10 @@ import { mutations } from '../../store'
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
+
+jest.mock('axios', () => ({
+  get: jest.fn(() => Promise.resolve({status: 200}))
+})) 
 
 describe('Index.vue', () => {
 
@@ -94,7 +98,7 @@ describe('Index.vue', () => {
   })
   
 
-  it('Adds products to the basket',  () => {
+  it('Adds products to the basket',  async () => {
     const wrapper = mount(Index, { store, localVue, 
         attachTo:document.body,
         data(){
@@ -108,8 +112,9 @@ describe('Index.vue', () => {
     let comp= wrapper.findComponent(Product)
     let button = comp.find('button')
     button.trigger('click')
-
+    await flushPromises()
     expect(mutations.addItem).toHaveBeenCalled()
+    
     //wrapper.destroy()
   })
   
